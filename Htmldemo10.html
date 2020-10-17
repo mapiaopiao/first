@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+     <style type="text/css">
+        #p1{margin: auto;width: 800px;height: 220px;background-color: rgb(159, 245, 211);}
+    </style>
+    </style>
+</head>
+<body>
+    <div id="p1">
+    <fieldset>
+    <legend><h3>注册页面</h3></legend>
+    <form action="regsuccess.html" method="POST" onsubmit="return checkform()">
+        <table>
+            <tr>
+                <td>用户名：</td>
+                <td> 
+                    <input type="text" name="username" id="userid" onkeyup="checkusername()"/> 
+                    <span id="userMsg"></span>
+                    <font color=red>（字母数字下划线1-10位，不能以数字开头）</font>
+                </td>
+            </tr>
+        <tr>
+            <td>手机号：</td>
+            <td> 
+                <input type="text" name="phonename" id="phoneid" onkeyup="checkphone()"/>
+                <span id="phoneMsg"></span>
+                <font color=red>（以1开头，第二位是3，5,7,9共11位数字）</font>
+            </td>
+        </tr>
+        <tr>
+            <td>密码：</td>
+            <td> 
+                <input type="password" name="password" id="pswid" onkeyup="checkpsw()"/>
+                <span id="pswMsg"></span>
+                <font color=red>（字符为6-16位）</font>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 10px 300px;" colspan="2">
+                <input type="submit" id="subid" value="注册"/>
+            </td>
+        </tr>
+    </table>
+    </form>
+</fieldset>
+</div>
+</body>
+<script type="text/javascript">
+    var usernameobj;
+    var phoneobj;
+    var pswobj;
+    var userMsg;
+    var phoneMsg;
+    var pswMsg;
+    window.onload=function(){
+        usernameobj=document.getElementById("userid");
+        phoneobj=document.getElementById("phoneid");
+        pswobj=document.getElementById("pswid");
+        userMsg=document.getElementById("userMsg");
+        phoneMsg=document.getElementById("phoneMsg");
+        pswMsg=document.getElementById("pswMsg");
+    }
+    function checkform(){
+        var flaguser=checkusername();
+        var flagphone=checkphone();
+        var flagpsw=checkpsw();
+        return flaguser&&flagphone&&flagpsw;
+    }
+    function checkusername(){
+        var value=usernameobj.value;
+        var reg=/^[a-zA-Z_]\w{0,9}$/;
+        var flag=reg.test(value);
+        if(value==""){
+            userMsg.innerHTML="用户名不允许为空";
+            return false;
+        }
+        else if(!flag){
+            userMsg.innerHTML="用户名非法";
+            return false;
+        }
+        else{
+            userMsg.innerHTML="";
+            return true;
+        }
+    }
+    function checkphone(){
+        var value=phoneobj.value;
+        var reg=/^1[3|5|7|9]{1}[0-9]{9}$/;
+        var flag=reg.test(value);
+        if(value==""){
+            phoneMsg.innerHTML="手机号不允许为空";
+            return false;
+        }
+        else if(!flag){
+            phoneMsg.innerHTML="手机号非法";
+            return false;
+        }
+        else{
+            phoneMsg.innerHTML="";
+            return true;
+        }
+    }
+    function checkpsw(){
+        var value=pswobj.value;
+        var reg=/^.{6,16}$/;
+        var flag=reg.test(value);
+        if(value==""){
+            pswMsg.innerHTML="密码不允许为空";
+            return false;
+        }
+        else if(!flag){
+            pswMsg.innerHTML="密码非法";
+            return false;
+        }
+        else{
+            pswMsg.innerHTML="";
+            return true;
+        }
+    }
+
+</script>
+</html>
